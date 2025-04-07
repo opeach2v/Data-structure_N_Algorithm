@@ -1,8 +1,7 @@
 // import java.util.Scanner;
 
 public class ParcelService {
-    public int solution(int n, int w, int num) {    // 22, 6, 8
-        int line = 0;    // 현재 계산 중인 박스 줄
+    public int solution(int n, int w, int num) {
         int index = 0;  // w에서 몇 번째인지
         int up = 0; // 꺼내야 하는 택배 상자 윗 줄에 있을 상자
         int result = 1; // 꺼내려는 상자(미리 1 저장) + 꺼내기 위해 꺼내야 하는 상자
@@ -31,48 +30,25 @@ public class ParcelService {
 
         for(int i = 1; i <= n; i++) {   // 모든 상자 순차적으로 확인
             if(i == num) {  // 꺼내야 하는 택배 상자 만나면
-                line = num / w; // 몇 줄?
-                if(num % w != 0) {  // 나머지가 0이 아니면 +1해줘야 함
-                    line++;
-                }
                 index = num % w;  // 몇번째 인덱스에 있는지
                 // index가 0이면 그대로 배열 적용하면 됨.
                 // But, 0다음엔 5, 4, 3, 2, 1이 됨. ex) 0 5 4 3 2 1 배열이라는 소리
-                if(line == 1 || line == 3 || line == 5 || line == 7 || line == 9) {    // 홀수 줄
-                    // 따라서 홀수 줄이면서 index가 0이 아니면
-                    if(index != 0) {
-                        up = num + haha2[index - 1];
-                    }
-                    else {
-                        up = num + haha[0];
-                    }
-                    if(up > n) {
-                        break;
-                    }
-                    else {
-                        result++;
-                        num = up;
-                        line = 0;
-                        index = 0;
-                    }
+                
+                if(index != 0) {
+                    up = num + haha2[index - 1];
                 }
-                else {  // 짝수 줄이면서
-                    if(index != 0) {
-                        up = num + haha2[index - 1];
-                    }
-                    else {
-                        up = num + haha[0];
-                    }
-                    if(up > n) {
-                        break;
-                    }
-                    else {
-                        result++;
-                        num = up;
-                        line = 0;
-                        index = 0;
-                    }
+                else {
+                    up = num + haha[0];
                 }
+                if(up > n) {
+                    break;
+                }
+                else {
+                    result++;
+                    num = up;
+                    index = 0;
+                }
+                
             }
         }
         return result;
