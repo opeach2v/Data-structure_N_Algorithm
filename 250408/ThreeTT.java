@@ -55,7 +55,7 @@ public class ThreeTT {
     }
 
     public static void main(String[] args) {
-        String myStr = "abcd";
+        String myStr = "baconlettarstomato";
         String[] result = {};
 
         ThreeTT t = new ThreeTT();
