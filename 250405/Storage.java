@@ -1,4 +1,4 @@
-class Solution {
+class Test {
     public String solution(String[] storage, int[] num) {
         int num_item = 0;
         String[] clean_storage = new String[storage.length];
