@@ -1,4 +1,3 @@
-
 public class KthNum {
     public int[] solution(int[] array, int[][] commands) {
         int i = 0, j = 0, k = 0;
@@ -42,5 +41,6 @@ public class KthNum {
         KthNum k = new KthNum();
         result = k.solution(array, commands);
 
+        System.out.println(result);
     }
 }
