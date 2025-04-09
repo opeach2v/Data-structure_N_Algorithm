@@ -15,7 +15,7 @@ public class BigNum {
                     if(i == 6) {
                         break;
                     }
-                    if(numS[saveIndex[i]] == "") {  // 비어있을 경우 한 번 건너뛰어서 저장
+                    if(numS[saveIndex[i]].equals("")) {  // 비어있을 경우 한 번 건너뛰어서 저장
                         for(int a = 0; a < numS.length; a++) {
                             if(!numS[a].equals("")) {
                                 saveIndex[i] = saveIndex[i + 1];
