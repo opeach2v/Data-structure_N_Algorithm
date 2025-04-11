@@ -1,4 +1,4 @@
-public class Game {
+public class DiceGame {
     public int solution(int a, int b) {
         int answer = 0;
 
