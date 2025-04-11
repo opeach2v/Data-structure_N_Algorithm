@@ -5,7 +5,7 @@ public class Bus {
             num_passenger += func3(passengers[i]);
             num_passenger -= func4(passengers[i]);
         }
-        int answer = func1(num_passenger);
+        int answer = func1(seat + num_passenger);
         return answer;
     }
 

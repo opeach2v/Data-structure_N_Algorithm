@@ -1,10 +1,8 @@
 public class Add {
     public int solution(int n) {
         int answer = 0;
-        int i = 0;
         while(n > 0) {
-            i = n % 10; // 1의 자리
-            answer += i;
+            answer += n % 10;
             n /= 10;
         }
 
