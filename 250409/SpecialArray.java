@@ -1,7 +1,6 @@
 public class SpecialArray {
     public int[] solution(int[] numlist, int n) {
         int[] answer = new int[numlist.length];
-
         int[] nums = new int[numlist.length];
 
         // n과 가까운 수 구하기 위한 배열
