@@ -3,12 +3,12 @@ public class BigNums {
         String answer = "";
         String[] numS = number.split("");
         int count = 0;  // 삭제되면 카운트++
-        int num = 0;    // 1부터 삭제
+        int num = 0;    // 0부터 삭제
 
         int max = 0;    // 가장 큰 숫자의 인덱스 저장
         int maxCount = 0;
         // 제일 큰 숫자 발견하기
-        for(int i = 0; i < numS.length; i++) {
+        for(int i = 1; i < numS.length; i++) {
             if(Integer.parseInt(numS[max]) < Integer.parseInt(numS[i])) {
                 max = i;
             }
@@ -28,7 +28,7 @@ public class BigNums {
 
         // 최종적으로 큰 숫자 앞에서 작은 수부터 삭제
         while_exit:
-        if(max > 0 && max < numS.length - 1) {   // max인덱스가 0보다 클 때 여기 실행
+        if(max > 0 && max < numS.length - 1) {   // max인덱스가 맨 처음과 맨 끝이 아닐 때 여기 실행
             while(num < Integer.parseInt(numS[max])) {  // max번째 인덱스의 숫자가 되기 전까지
                 for(int i = 0; i < max; i++) {
                     if(numS[i].equals("")) {
@@ -38,18 +38,14 @@ public class BigNums {
                         numS[i] = "";   // 비우기
                         count++;
                     }
-                    if(count == k) {    // 카운트가 k만큼 되면
-                        break while_exit;
-                    }
+                    if(count == k) break while_exit;
                 }
-                if(count == k) {    // 카운트가 k만큼 되면
-                    break;
-                }
+                if(count == k) break while_exit;
                 num++;  // 다음 숫자로 다시 돌기
             }
 
             // 반복문을 빠져나왔는데도 카운트가 k만큼 안 됐으면
-            num = 0;    // 다시 1로 만들어주기
+            num = 0;    // 다시 0으로 만들어주기
             if(count < k) {
                 while(num < Integer.parseInt(numS[max])) {
                     for(int i = max + 1; i < numS.length; i++) {    // max 인덱스 이후 비교
@@ -60,10 +56,9 @@ public class BigNums {
                             numS[i] = "";   // 비우기
                             count++;
                         }
+                        if(count == k) break while_exit;
                     }
-                    if(count == k) {    // 카운트가 k만큼 되면
-                        break;
-                    }
+                    if(count == k) break while_exit;
                     num++;
                 }
                 
@@ -77,10 +72,9 @@ public class BigNums {
                             numS[i] = "";   // 비우기
                             count++;
                         }
-                        if(count == k) {    // 카운트가 k만큼 되면
-                            break while_exit;
-                        }
+                        if(count == k) break while_exit;
                     }
+                    if(count == k) break while_exit;
                 }
             }
         }
@@ -95,16 +89,15 @@ public class BigNums {
                             numS[i] = "";   // 비우기
                             count++;
                         }
-                        if(count == k) {    // 카운트가 k만큼 되면
-                            break while_exit;
-                        }
+                        if(count == k) break while_exit;
                     }
+                    if(count == k) break while_exit;
                     num++;  // 다음 숫자로 다시 돌기
                 }
             }
-            else if(max == numS.length - 1) {
-                while(num <= Integer.parseInt(numS[max])) {  // max번째 인덱스의 숫자까지 카운트에 맞게 지우기
-                    for(int i = 0; i < numS.length; i++) {
+            else if(max == numS.length - 1) {   // 맨 끝일 때
+                while(num < Integer.parseInt(numS[max])) {  // max번째 인덱스의 숫자까지 카운트에 맞게 지우기
+                    for(int i = 0; i < numS.length - 1; i++) {
                         if(numS[i].equals("")) {
                             continue;
                         }
@@ -112,10 +105,9 @@ public class BigNums {
                             numS[i] = "";   // 비우기
                             count++;
                         }
-                        if(count == k) {    // 카운트가 k만큼 되면
-                            break while_exit;
-                        }
+                        if(count == k) break while_exit;
                     }
+                    if(count == k) break while_exit;
                     num++;  // 다음 숫자로 다시 돌기
                 }
             }
@@ -132,8 +124,8 @@ public class BigNums {
     }
 
     public static void main(String[] args) {
-        String num = "7771377";
-        int k = 5;
+        String num = "121312112";
+        int k = 1;
 
         BigNums b = new BigNums();
         String result = b.solution(num, k);
