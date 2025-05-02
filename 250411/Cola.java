@@ -1,7 +1,7 @@
 public class Cola {
     public int[] solution(int n) {
         int[] cel = new int[n];
-        int[] answer = new int[n];
+        int[] answer = {};
         int i = 1;
 
         cel[0] = n;
