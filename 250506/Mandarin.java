@@ -21,22 +21,19 @@ public class Mandarin {
             tanCount.add(tans.get(tan.get(i)));  // 귤 순서대로 해당 귤 갯수 넣기
         }
 
-        if(k == tangerine.length) return 1; // 넣어야하는 수가 최대면 1밖에 없음
-        else {
-            Collections.sort(tanCount);
+        Collections.sort(tanCount);
 
-            for(int i = tanCount.size() - 1; i >= 0; i--) {
-                if(tanCount.get(i) >= k) {
-                    return 1;
+        for(int i = tanCount.size() - 1; i >= 0; i--) {
+            if(tanCount.get(i) >= k) {
+                return 1;
+            }
+            else {
+                if(count < k) {
+                    count += tanCount.get(i);
+                    answer++;
                 }
-                else {
-                    if(count < k) {
-                        count += tanCount.get(i);
-                        answer++;
-                    }
-                    
-                    if(count >= k) return answer;
-                }
+                
+                if(count >= k) return answer;
             }
         }
 
@@ -45,7 +42,7 @@ public class Mandarin {
 
     public static void main(String[] args) {
         int k = 3;
-        int[] tangerine = {1, 1, 2, 2};
+        int[] tangerine = {1, 1, 2};
         int res = 0;
 
         Mandarin m = new Mandarin();

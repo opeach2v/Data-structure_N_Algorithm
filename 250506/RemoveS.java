@@ -3,18 +3,23 @@ import java.util.Deque;
 
 public class RemoveS {
     public int solution(String s) {
-        int answer = 0;
-
         Deque<String> stack = new ArrayDeque<>();   // 스택 사용
-        for(int i = 0; i < s.length(); i++) {
-            stack.push(String.valueOf(s.charAt(i)));
+        
+        for(String ss : s.split("")) {
+            if(stack.isEmpty()) {
+                stack.push(ss);
+                continue;
+            }
+            if(ss.equals(stack.peek())) stack.pop();
+            else stack.push(ss);
         }
+        if(stack.isEmpty()) return 1;   // 다 사라졌다는 거니까
 
-        return answer;
+        return 0;
     }
 
     public static void main(String[] args) {
-        String s = "baab";
+        String s = "baabaa";
         int res = 0;
 
         RemoveS r = new RemoveS();
