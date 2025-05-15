@@ -43,7 +43,6 @@ public class Polynomial {
             }
         }
 
-
         return answer;
     }
 }

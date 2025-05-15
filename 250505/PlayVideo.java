@@ -23,7 +23,7 @@ public class PlayVideo {
 
         for(int i = 0; i < commands.length; i++) {
             if(commands[i].equals("next")) {    // "next"일 때
-                if((videoM == mm && videoS - ss < 10) || (videoM - 1 == mm && videoS + ss > 50)) {  // 전체 길이에서 10초 미만일 때
+                if((videoM == mm && videoS - ss < 10) || (videoM - 1 == mm && videoS - ss < -50)) {  // 전체 길이에서 10초 미만일 때
                     mm = videoM;    // 비디오 끝으로 이동
                     ss = videoS;
                 }
@@ -57,16 +57,6 @@ public class PlayVideo {
                 mm = opEndM;    // 오프닝 끝으로 이동
                 ss = opEndS;
             }
-        }
-        if(ss >= 10) {
-            posMs = String.valueOf(mm) + String.valueOf(ss);
-        }
-        else {
-            posMs = String.valueOf(mm) +"0" +String.valueOf(ss);
-        }
-        if(Integer.parseInt(opStart) <= Integer.parseInt(posMs) && Integer.parseInt(opEnd) >= Integer.parseInt(posMs)) {  // 오프닝 사이에 위치해 있으면
-            mm = opEndM;    // 오프닝 끝으로 이동
-            ss = opEndS;
         }
 
         if(mm >= 10) {   // 분이 10보다 크면
