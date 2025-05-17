@@ -1,54 +1,58 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 
 public class TheHallOfFame {
     public int[] solution(int k, int[] score) {
         int[] answer = new int[score.length];
 
-        Deque<Integer> scoreQueue = new ArrayDeque<Integer>();
+        Deque<Integer> qScore = new ArrayDeque<>(); // score의 값 넣기 (큐)
+        for(int i = 0; i < score.length; i++) qScore.offer(score[i]);
+        Deque<Integer> sScore = new ArrayDeque<Integer>();  // 명예의 전당 목록 (스택, 큐 공동 사용(되나?))
+
         int idx = 0;    // answer의 인덱스
         for(int i = 0; i < score.length; i++) {
-            System.out.println(scoreQueue);
-            if(i != 0 && score[i - 1] > score[i]) { // 다음 점수가 더 낮을 경우
-                if(scoreQueue.peek() > score[i]) {  // 맨 앞 요소가 현재 score의 점수보다 크면 안 넣음
-                    answer[idx] = scoreQueue.peek();
-                    idx++;
-                    continue;
-                }
-                int temp = scoreQueue.pop();   // 맨 뒤 삭제
-                scoreQueue.push(score[i]);
-                scoreQueue.push(temp);
-                if(scoreQueue.size() > k) scoreQueue.poll();
-                answer[idx] = scoreQueue.peek();
+            if(sScore.isEmpty()) {
+                sScore.push(qScore.poll());
+                answer[idx] = sScore.peekLast();
                 idx++;
+                continue;
+            }
+            if(sScore.size() > k) {
+                if(sScore.peek() <= qScore.peek()) {
+                    sScore.poll();
+                    sScore.push(qScore.poll());
+                }
+                else qScore.poll();
             }
             else {
-                if(scoreQueue.size() < k) { // 스택의 내용물이 k보다 작으면
-                    if(i != 0 && scoreQueue.getLast() > score[i]) {
-                        scoreQueue.pop();   // 맨 뒤 삭제
-                        scoreQueue.push(score[i]);
-                    }
-                    else {
-                        scoreQueue.offer(score[i]);
-                    }
-                    answer[idx] = scoreQueue.peek();
-                    idx++;
+                if(sScore.peekLast() <= qScore.peek()){  // 넣을 원소가 원래 있던 원소보다 작으면 패스~
+                    sScore.push(qScore.poll());   // 맨 처음 점수 부터 넣기
                 }
-                else {  // 큐가 k만큼 차잇으면 순차적으로 넣으면서 빼기
-                    if(i != 0 && scoreQueue.getLast() > score[i]) {
-                        scoreQueue.pop();   // 맨 뒤 삭제
-                        scoreQueue.push(score[i]);
-                        scoreQueue.poll();
-                    }
-                    else {
-                        scoreQueue.offer(score[i]);
-                        scoreQueue.poll();
-                    }
-                    answer[idx] = scoreQueue.peek(); // 넣을 때마다 맨 앞은 삭제하면서 저장
-                    idx++;
-                }
+                else qScore.poll(); // 그냥 빼내버리기만 ㄲ
             }
 
+            if(sScore.size() == k)  {   // 목록이 k만큼 다 차면
+                ArrayList<Integer> sort = new ArrayList<>();
+                for(int j = 0; j < sScore.size(); j++) {    // 스택 값 넣고
+                    sort.add(sScore.poll());
+                    j--;
+                }
+                
+                // 오름차순 정렬 후 스택으로 다시 넣기
+                Collections.sort(sort);
+                for(int j = sort.size() - 1; j >= 0; j--) {
+                    sScore.push(sort.get(j));
+                }
+                
+                answer[idx] = sScore.peek();    // 맨 앞 숫자 빼내기
+                idx++;
+                continue;
+            }
+
+            answer[idx] = sScore.peekLast();
+            idx++;
         }
 
         return answer;
