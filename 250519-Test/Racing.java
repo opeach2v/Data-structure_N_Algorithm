@@ -12,10 +12,12 @@ public class Racing {
         for(i = 0; i < callings.length; i++) {
             if(player.containsKey(callings[i])) {   // 해당 키 찾아서
                 String temp = players[player.get(callings[i])]; // 해당 인덱스 키의 값을 가지고
-                player.put(callings[i], player.get(callings[i]) - 1);   // 등수도 바꿔주고
+                String prevP = players[player.get(callings[i]) - 1];
                 players[player.get(callings[i])] = players[player.get(callings[i]) - 1];
-                player.put(players[player.get(callings[i]) - 1], player.get(players[player.get(callings[i]) - 1]) + 1);
-                players[player.get(callings[i])] = temp;    // 추월 시키고 
+                players[player.get(callings[i]) - 1] = temp;    // 추월 시키고 
+                
+                player.put(callings[i], player.get(callings[i]) - 1);   // 등수도 바꿔주고
+                player.put(prevP, player.get(prevP) + 1);
             }
         }
 
@@ -27,6 +29,7 @@ public class Racing {
         String[] callings = {"kai", "kai", "mine", "mine"};
         String[] res = {};
 
-
+        Racing r = new Racing();
+        res = r.solution(players, callings);
     }
 }
