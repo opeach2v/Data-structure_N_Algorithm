@@ -1,21 +1,34 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class ObigNum {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int count = sc.nextInt();
-        int[] arr = new int[count];
-        for(int i = 0; i < count; i++) arr[i] = sc.nextInt();
-        
-        for(int i = 0; i < count; i++) {
-            int max = 0;
-            for(int j = i + 1; j < count; j++) {
-                if(arr[i] < arr[j]) {
-                    max = arr[j];
-                }
-            }
-            if(max != 0) System.out.print(max +" ");    // max가 0이 아니면
-            else System.out.print("-1 ");   // max가 0이면 -1로
+
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < count; i++) {
+            stack.push(sc.nextInt());
         }
+
+        List<Integer> result = new ArrayList<>();
+        int max = stack.pop();  // 첫 번째 비교 대상
+        result.add(-1);
+
+        while (!stack.isEmpty()) {
+            int current = stack.pop();
+
+            if (current < max) {
+                result.add(max);
+            } else {
+                result.add(-1);
+                max = current;
+            }
+        }
+
+        // 뒤집어서 출력
+        Collections.reverse(result);
+        StringBuilder sb = new StringBuilder();
+        for (int num : result) sb.append(num).append(" ");
+        System.out.println(sb.toString().trim());
     }
 }

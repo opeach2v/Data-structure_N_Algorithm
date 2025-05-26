@@ -1,30 +1,35 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Scanner;
 
 public class StackProgression {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int topCount = sc.nextInt();   // 탑의 수
-
+        int topCount = sc.nextInt();    // 반복문 횟수
+        ArrayList<String> list = new ArrayList<>();
         Deque<Integer> stack = new ArrayDeque<>();
 
-        for(int i = 0; i < topCount; i++) {
-            stack.push(sc.nextInt());
-        }
+        int num = 1;    // 1부터 쌓기
+        for (int i = 0; i < topCount; i++) {
+            int input = sc.nextInt();
 
-        int num = 0;
-        for(int i = 0; i < topCount; i++) {
-            if(stack.size() == topCount) {
-                num = stack.pop();
-                continue;
+            // 필요한 만큼 push
+            while (num <= input) {
+                stack.push(num++);
+                list.add("+");
             }
 
-            if(num >= stack.peek()) {
+            // input이 stack의 top이어야 함
+            if (!stack.isEmpty() && stack.peek() == input) {
                 stack.pop();
-                
+                list.add("-");
+            } else {
+                System.out.println("NO");
+                return;
             }
-
         }
+
+        for(String s : list) System.out.println(s);
     }
 }

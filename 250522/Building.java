@@ -1,37 +1,26 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
 
 public class Building {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int buildingCount = sc.nextInt();
-        int[] floors = new int[buildingCount];
-        int sum = 0;
-
-        for(int i = 0; i < buildingCount; i++) {
-            floors[i] = sc.nextInt();
+        int N = sc.nextInt();
+        long[] arr = new long[N];
+        long answer = 0;
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextLong();
         }
-
-        int num = 0;
-        int count = 0;
-        int floor = 0;
-        for(int i = num; i < floors.length; i++) {
-            if(i == num) {
-                floor = floors[num];    // 해당 층
-                continue;
+        Deque<Integer> stack = new ArrayDeque<>();
+        long count = 0;
+        for (int i = 0; i < N; i++) {
+            while (!stack.isEmpty() && arr[stack.peek()] <= arr[i]) {
+                stack.pop();
             }
-
-            if(floor > floors[i]) {
-                count++;
-            }
-            else {  // floor <= floors[i]라면
-                sum += count;
-                count = 0;
-                num++;
-                i = num - 1;
-            }
+            count = stack.size();
+            answer += count;
+            stack.push(i);
         }
-        sum += count;
-
-        System.out.println(sum);
+        System.out.println(answer);
     }
 }
