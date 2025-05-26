@@ -1,4 +1,3 @@
-
 public class Knight {
     public int solution(int number, int limit, int power) {
         int answer = 1; // 1번 기사 약수는 항상 1 / 2, 3번 기사는 항상 2

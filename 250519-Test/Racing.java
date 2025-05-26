@@ -27,6 +27,7 @@ public class Racing {
         String[] callings = {"kai", "kai", "mine", "mine"};
         String[] res = {};
 
-
+        Racing r = new Racing();
+        res = r.solution(players, callings);
     }
 }
