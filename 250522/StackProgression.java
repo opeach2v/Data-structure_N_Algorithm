@@ -31,5 +31,6 @@ public class StackProgression {
         }
 
         for(String s : list) System.out.println(s);
+        sc.close();
     }
 }

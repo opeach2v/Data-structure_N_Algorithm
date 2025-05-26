@@ -1,5 +1,4 @@
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Scanner;
 
@@ -9,7 +8,6 @@ public class Stack {
         int num = sc.nextInt(); // 명령의 수
         
         Deque<Integer> stack = new ArrayDeque<>();
-        ArrayList<Integer> list = new ArrayList<>();
         
         for(int i = 0; i <= num; i++) {  // 주어진 명령의 수만큼 돌면서
             String str = sc.nextLine();
